@@ -1,7 +1,6 @@
 # https://docs.docker.com/compose/compose-file/
 version: '2.1'
 services:
-  # Hangline service (nginx & flask)
   tavhacks:
     build: .
     image: tavhacks
