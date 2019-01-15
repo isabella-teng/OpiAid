@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+app/__pycache__/
+*.py[dco]
+*$py.class
+*.mypy_cache/
+
+# Mac custom attributes file (Desktop Service Store)
+.DS_Store
+
+# PyCharm files
+.idea/
+
+# secrets and configuration
+/backend/flask.cfg
+/backend/.pytest_cache/
+
+*.swp
+
+# tags file
+tags
+
+redis/

@@ -1,0 +1,13 @@
+version: '2.1'
+services:
+  tavhacks:
+    extends:
+      file: docker-compose-base.yaml
+      service: tavhacks
+    depends_on:
+      - redis
+    entrypoint: /entrypoint.sh -r -d
+  redis:
+    extends:
+      file: docker-compose-base.yaml
+      service: redis

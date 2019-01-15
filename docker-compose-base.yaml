@@ -1,0 +1,25 @@
+# https://docs.docker.com/compose/compose-file/
+version: '2.1'
+services:
+  # Hangline service (nginx & flask)
+  tavhacks:
+    build: .
+    image: tavhacks
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8000:8000"
+    logging:
+      options:
+        max-size: 50m
+    volumes:
+      - ./backend:/backend
+    entrypoint: /entrypoint.sh -r
+  redis:
+    image: redis
+    ports:
+      - "6380:6380"
+    volumes:
+      - ./redis:/data
+    entrypoint: redis-server --appendonly yes
+    restart: always
