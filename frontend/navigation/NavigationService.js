@@ -1,4 +1,5 @@
 import { NavigationActions, StackActions } from 'react-navigation';
+import { Platform } from 'react-native';
 
 let _navigator;
 
@@ -23,4 +24,28 @@ const getNavigationState = ({ level = 0, state = _navigator } = {}) => {
   return fullState;
 };
 
-export { navigate, setTopLevelNavigator, getNavigationState };
+const dictToScreens = (screens, prefix = '', options = {}) => (
+  Object.entries(screens).reduce((acc, [key, value]) => {
+    acc[`${prefix}${key}`] = { screen: value };
+    return acc;
+  }, {})
+);
+
+// base navigation options for not-main-tabs (convo, settings, profile)
+const stackNavigatorConfig = {
+  headerStyle: {
+    // backgroundColor: '#363E54',
+    backgroundColor: '#3a4257',
+    ...(Platform.OS === 'ios' ? {} : {
+      marginTop: -20,
+      height: 60,
+    }),
+    borderBottomWidth: 0,
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    color: '#fff',
+  },
+};
+
+export { navigate, setTopLevelNavigator, getNavigationState, dictToScreens, stackNavigatorConfig };

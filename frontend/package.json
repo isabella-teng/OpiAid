@@ -14,6 +14,7 @@
     "js-sha256": "^0.9.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-gifted-chat": "^0.6.0",
     "react-native-screens": "^1.0.0-alpha.22",
     "react-navigation": "^3.0.9",
     "react-redux": "^6.0.0",
