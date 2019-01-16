@@ -11,10 +11,16 @@ class Home extends Component {
   toChatBot = () => {
     navigate('ChatScreen');
   }
+  toImportContacts = () => {
+    navigate('ImportContacts');
+  }
 
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#eeeeee', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20 }}>
+        <Touchable onPress={this.toImportContacts} style={{ backgroundColor: '#222E48', borderRadius: 5, padding: 10, alignSelf: 'stretch', alignItems: 'center', marginVertical: 10 }}>
+          <Text style={{ color: 'white' }}>Import Contacts</Text>
+        </Touchable>
         <Touchable onPress={this.toChatBot} style={{ backgroundColor: '#222E48', borderRadius: 5, padding: 10, alignSelf: 'stretch', alignItems: 'center', marginVertical: 10 }}>
           <Text style={{ color: 'white' }}>Chat Bot</Text>
         </Touchable>
