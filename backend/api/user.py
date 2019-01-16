@@ -7,6 +7,7 @@ from passlib.hash import sha256_crypt
 from app import app
 from models import db
 from models.user import User
+from helpers.user import current_user
 from util import get_request_data, safe_strip, fail_dict, success_dict, print_loc
 from decorators import jsonify_api, login_required_api
 
@@ -20,6 +21,12 @@ login_blueprint = Blueprint('login_blueprint', __name__)
 def login_as_user(user_id):
     session[SESH_USER_ID] = user_id
     return success_dict(data={'session': session_serializer.dumps(dict(session)), 'id': user_id})
+
+
+@login_blueprint.route('/me', methods=['POST', 'GET'])
+@login_required_api
+def me_route():
+    return current_user().asdict()
 
 
 @login_blueprint.route('/login', methods=['POST', 'GET'])
