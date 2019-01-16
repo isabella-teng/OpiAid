@@ -112,7 +112,6 @@ class ChatScreen extends Component {
         <GiftedChat
           textInputProps={{autoFocus: true}}
           messages={this.state.messages}
-          placeholder='Ask me anything...'
           onSend={messages => this.onSend(messages)}
           user={{
             _id: 1,

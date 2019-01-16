@@ -57,8 +57,9 @@ def create_app(name='app', config='Config', settings=None, default_celery=False)
 
 def register_blueprints(flask_app):
     from api.user import login_blueprint
+    from api.message import messaging_blueprint
 
-    blueprints = [login_blueprint]
+    blueprints = [login_blueprint, messaging_blueprint]
 
     for blueprint in blueprints:
         flask_app.register_blueprint(blueprint)

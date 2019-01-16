@@ -32,3 +32,4 @@ db = SQLAlchemy(model_class=BaseModel)
 Model = db.Model
 
 from models.user import User
+from models.message import Message
