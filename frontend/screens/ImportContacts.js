@@ -22,6 +22,7 @@ class ImportContacts extends Component {
       permission: null,
       refreshing: false,
       isChecked : [],
+      addingFriends: true,
     };
 
   async componentDidMount() {
@@ -67,7 +68,8 @@ class ImportContacts extends Component {
   };
 
   _showAlert = () => {
-    alert('Alert Title')
+    alert(this.state.addingFriends ?  'Good Contacts Added!': 'To Avoid Contacts Added!')
+    this.setState({addingFriends: false})
   }
 
   _keyExtractor = (item, index) => item.id;
@@ -83,10 +85,12 @@ class ImportContacts extends Component {
     }
   }
 
-  onSubmitFriends = () => {
-    console.log(this.selectedLists); //send to backend
+  onSubmit = () => {
+    console.log(this.selectedLists); //TODO: send to backend, edit schema
+    this.selectedLists = [];
+    this.setState({isChecked: []})
+    this._showAlert();
   }
-
 
   render() {
 
@@ -103,8 +107,8 @@ class ImportContacts extends Component {
         <Content>
         <TouchableHighlight
          style={styles.button}
-         onPress={this.onSubmitFriends}>
-         <Text> Add Your Friends </Text>
+         onPress={() => this.onSubmit()}>
+         <Text> {this.state.addingFriends? 'Add Your Friends' : 'Add To Avoid'} </Text>
         </TouchableHighlight>
         <FlatList
            keyExtractor={this._keyExtractor}
