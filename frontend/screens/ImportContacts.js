@@ -1,7 +1,7 @@
 import { clearState, dispatchToProps } from '../redux/util';
 import React, { Component } from "react";
 import { AppRegistry, FlatList, StyleSheet, Text, View,
-  ActivityIndicator, TouchableHighlight } from 'react-native';
+  ActivityIndicator, TouchableHighlight, ScrollView} from 'react-native';
 import { Container, Header, Content, List, ListItem, Separator } from "native-base";
 import { connect } from 'react-redux';
 import { CheckBox } from 'react-native-elements';
@@ -68,7 +68,8 @@ class ImportContacts extends Component {
   };
 
   _showAlert = () => {
-    alert(this.state.addingFriends ?  'Good Contacts Added!': 'To Avoid Contacts Added!')
+    alert(this.state.addingFriends ?  'Good Contacts Imported!':
+    'Contacts To Avoid Imported!')
     this.setState({addingFriends: false})
   }
 
@@ -103,29 +104,30 @@ class ImportContacts extends Component {
     }
 
     return (
-      <Container>
+      <Container style={styles.container}>
         <Content>
-        <TouchableHighlight
-         style={styles.button}
-         onPress={() => this.onSubmit()}>
-         <Text> {this.state.addingFriends? 'Add Your Friends' : 'Add To Avoid'} </Text>
-        </TouchableHighlight>
-        <FlatList
-           keyExtractor={this._keyExtractor}
-           renderItem={({ item, index}) =>
-            <ListItem>
-              <CheckBox
-                checked={this.state.isChecked[index]}
-                onPress={() => this.isIconCheckedOrNot(item,index)}
-              />
-              <Text>{item.name}</Text>
-            </ListItem>
-           }
-           onEndReachedThreshold={-1.5}
-           data={contacts.filter(x => x.firstName != null).sort((a,b) => {return a.firstName.localeCompare(b.firstName) })}
-           onPressItem={this.onPressItem}
-           onEndReached={this.loadAsync}
-        />
+          <TouchableHighlight
+           style={this.state.addingFriends? styles.friendButton: styles.avoidButton}
+           onPress={() => this.onSubmit()}>
+           <Text style={styles.buttonText}>
+           {this.state.addingFriends? 'Add Your Friends' : 'Add Contacts To Avoid'} </Text>
+          </TouchableHighlight>
+          <ScrollView style={styles.scroll}>
+            <FlatList
+               keyExtractor={this._keyExtractor}
+               renderItem={({ item, index}) =>
+                  <CheckBox
+                    checked={this.state.isChecked[index]}
+                    onPress={() => this.isIconCheckedOrNot(item,index)}
+                    title={item.name}
+                  />
+               }
+               onEndReachedThreshold={-1.5}
+               data={contacts.filter(x => x.firstName != null).sort((a,b) => {return a.firstName.localeCompare(b.firstName) })}
+               onPressItem={this.onPressItem}
+               onEndReached={this.loadAsync}
+            />
+          </ScrollView>
         </Content>
       </Container>
     )
@@ -135,20 +137,36 @@ class ImportContacts extends Component {
 const styles = StyleSheet.create({
   container: {
    flex: 1,
-   paddingTop: 22
   },
   item: {
     padding: 10,
     fontSize: 18,
     height: 44,
   },
-  button: {
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
+  },
+  friendButton: {
+    height: 60,
+    backgroundColor: '#83A4FF',
+    borderRadius: 10,
+    padding: 10,
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10
+    justifyContent: 'center',
+  },
+  avoidButton: {
+    height: 60,
+    backgroundColor: '#FD9B9F',
+    borderRadius: 10,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  scroll: {
+    height: 500,
   }
 })
-
 
 const mapDispatchToProps = dispatchToProps({ logout: clearState });
 export default connect(null, mapDispatchToProps)(ImportContacts);

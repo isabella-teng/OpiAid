@@ -40,14 +40,14 @@ class Home extends Component {
             colors={['#9BCDFE', '#9CBDF8', '#83A4FF']}
             style={{ height: 160, width: 160, padding: 15, justifyContent: 'center', alignItems: 'center', borderRadius: 80 }}>
             <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 60, color: '#fff' }}>
-              69
+              136
             </Text>
             <Text style={{ textAlign: 'center', color: '#fff', fontSize: 16 }}>
               day streak
             </Text>
           </LinearGradient>
         </LinearGradient>
-        <View style={{ flexWrap: 'wrap', flexDirection: 'row', paddingHorizontal: 50, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flexWrap: 'wrap', flexDirection: 'row', paddingHorizontal: 25, alignItems: 'center', justifyContent: 'center' }}>
           <Touchable onPress={this.toChatBot} style={styles.buttonContainer} feedback>
             <View style={styles.button}>
               <Image source={icons.chat} style={styles.icon} />
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 80,
     backgroundColor: '#83A4FF',
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
