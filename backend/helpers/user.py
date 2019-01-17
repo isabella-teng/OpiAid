@@ -4,7 +4,7 @@ from flask import session
 from constants import SESH_USER_ID
 
 
-#@cache.memoize(30)
+@cache.memoize(30)
 def get_user(**kwargs):
     return User.query.filter_by(**kwargs).one_or_none()
 

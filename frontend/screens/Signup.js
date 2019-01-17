@@ -73,7 +73,7 @@ class Signup extends Component {
 
     return (
       <Touchable style={styles.container} onPress={Keyboard.dismiss}>
-        <Text style={[styles.title, { alignSelf: 'flex-start' }]}>_Insert name_</Text>
+        <Text style={[styles.title, { alignSelf: 'flex-start' }]}>OPIAID</Text>
 
         <ErrorBar error={this.state.error} />
 
@@ -109,12 +109,12 @@ class Signup extends Component {
         />
 
         <Touchable style={styles.shortButton} onPress={this.login} feedback disabled={!validInput || this.state.loading}>
-          <Text style={[styles.shortButtonText, buttonTextStyle]}>{this.state.isLogin ? 'Log in' : 'Signup'}</Text>
+          <Text style={[styles.shortButtonText, buttonTextStyle]}>{this.state.isLogin ? 'Log in' : 'Register'}</Text>
           {this.state.loading && <ActivityIndicator style={{ position: 'absolute', right: 20 }} />}
         </Touchable>
 
         <Touchable onPress={this.toggleLogin} feedback>
-          <Text style={styles.smallText}>{this.state.isLogin ? 'Don\'t have an account? Sign up!' : 'Already have an account? Log in!'}</Text>
+          <Text style={styles.smallText}>{this.state.isLogin ? 'Don\'t have an account? Register!' : 'Already have an account? Log in!'}</Text>
         </Touchable>
       </Touchable>
     );

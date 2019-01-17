@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import * as Expo from 'expo';
 
 import { clearState, dispatchToProps } from '../redux/util';
@@ -122,11 +123,14 @@ class ChatScreen extends Component {
 
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={messages => this.onSend(messages)}
-        user={{ _id: 1 }}
-      />
+      <View style={{ flex: 1 }}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{ _id: 1 }}
+        />
+        <KeyboardSpacer />
+      </View>
     );
   }
 }

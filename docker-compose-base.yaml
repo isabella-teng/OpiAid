@@ -20,5 +20,5 @@ services:
       - "6380:6380"
     volumes:
       - ./redis:/data
-    entrypoint: redis-server --appendonly yes
+    entrypoint: redis-server --appendonly yes --port 6380
     restart: always

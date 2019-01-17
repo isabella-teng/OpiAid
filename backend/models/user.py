@@ -12,3 +12,9 @@ class User(db.Model, TimestampModel):
     def __init__(self, username, password):
         self.username = username
         self.pass_hash = sha256_crypt.encrypt(password)
+
+    def asdict(self):
+        return {
+            'id': self.id,
+            'username': self.username
+        }

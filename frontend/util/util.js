@@ -1,4 +1,4 @@
-import { NetInfo, Platform, NativeModules } from 'react-native';
+import { NetInfo, Platform, NativeModules, Dimensions } from 'react-native';
 
 import { store } from '../App';
 
@@ -138,8 +138,29 @@ const memoizeLast = (f, isEqual = (a, b) => a === b) => {
   };
 };
 
+
+const isIphoneX = () => {
+  const { height, width } = Dimensions.get('window');
+  const { OS, isPad, isTVOS } = Platform;
+
+  if (OS === 'ios' && !isPad && !isTVOS) {
+    const X_WIDTH = 375;
+    const X_HEIGHT = 812;
+
+    const XSMAX_WIDTH = 414;
+    const XSMAX_HEIGHT = 896;
+
+    return width === X_WIDTH && height === X_HEIGHT || width === XSMAX_WIDTH && height === XSMAX_HEIGHT;
+  }
+
+  return false;
+
+  // return (OS === 'ios' && !isPad && !isTVOS && [height, width].includes(812));
+};
+
 export {
   post,
   get,
-  memoizeLast
+  memoizeLast,
+  isIphoneX
 }
