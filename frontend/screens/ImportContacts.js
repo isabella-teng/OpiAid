@@ -1,8 +1,11 @@
 import { clearState, dispatchToProps } from '../redux/util';
 import React, { Component } from "react";
-import { AppRegistry, FlatList, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, View,
+  ActivityIndicator, TouchableHighlight } from 'react-native';
 import { Container, Header, Content, List, ListItem, Separator } from "native-base";
 import { connect } from 'react-redux';
+import { CheckBox } from 'react-native-elements';
+import Touchable from '../components/Touchable';
 
 const CONTACT_PAGE_SIZE = 100;
 
@@ -10,12 +13,15 @@ class ImportContacts extends Component {
 
     _rawContacts = {};
 
+    selectedLists = [];
+
     state = {
       contacts: [],
       hasPreviousPage: false,
       hasNextPage: false,
       permission: null,
       refreshing: false,
+      isChecked : [],
     };
 
   async componentDidMount() {
@@ -66,6 +72,21 @@ class ImportContacts extends Component {
 
   _keyExtractor = (item, index) => item.id;
 
+  isIconCheckedOrNot = (item,index) => {
+    let { isChecked} = this.state;
+    isChecked[index] = !isChecked[index];
+    this.setState({ isChecked  : isChecked });
+    if(isChecked[index] == true){
+        this.selectedLists.push(item.list_id)
+    }else {
+        this.selectedLists.pop(item.list_id)
+    }
+  }
+
+  onSubmitFriends = () => {
+    console.log(this.selectedLists); //send to backend
+  }
+
 
   render() {
 
@@ -80,10 +101,19 @@ class ImportContacts extends Component {
     return (
       <Container>
         <Content>
+        <TouchableHighlight
+         style={styles.button}
+         onPress={this.onSubmitFriends}>
+         <Text> Add Your Friends </Text>
+        </TouchableHighlight>
         <FlatList
            keyExtractor={this._keyExtractor}
-           renderItem={({ item }) =>
+           renderItem={({ item, index}) =>
             <ListItem>
+              <CheckBox
+                checked={this.state.isChecked[index]}
+                onPress={() => this.isIconCheckedOrNot(item,index)}
+              />
               <Text>{item.name}</Text>
             </ListItem>
            }
@@ -107,6 +137,11 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10
   }
 })
 
