@@ -108,18 +108,16 @@ class ChatScreen extends Component {
     }
   }
 
-  renderChat = () => {
-    return(
-        <GiftedChat
-          textInputProps={{autoFocus: true}}
-          messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
-          user={{
-            _id: 1,
-          }}
-        />
-    );
-  }
+  renderChat = () => (
+    <GiftedChat
+      textInputProps={{autoFocus: true}}
+      messages={this.state.messages}
+      onSend={messages => this.onSend(messages)}
+      user={{
+        _id: 1,
+      }}
+    />
+  );
 
   render() {
     return (
@@ -129,7 +127,7 @@ class ChatScreen extends Component {
           onSend={messages => this.onSend(messages)}
           user={{ _id: 1 }}
         />
-        <KeyboardSpacer />
+        {Platform.OS === 'android' && <KeyboardSpacer />}
       </View>
     );
   }
