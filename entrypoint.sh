@@ -24,7 +24,7 @@ if [ -e /debug1 ]; then
   echo "Running app in debug mode!"
   export FLASK_APP=/backend/app.py
   export FLASK_DEBUG=1
-  flask run --host=0.0.0.0 --port=80 --with-threads
+  flask run --host=0.0.0.0 --port=8000 --with-threads
 else
   echo "Running app in production mode!"
   nginx && uwsgi --ini /uwsgi.ini --master

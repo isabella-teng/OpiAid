@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
       ios: { flex: 1 },
     }),
     backgroundColor: '#fff',
-    paddingHorizontal: 60, 
+    paddingHorizontal: 60,
     paddingTop: 80,
   },
   title: {
@@ -169,4 +169,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
-
