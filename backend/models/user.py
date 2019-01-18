@@ -17,3 +17,10 @@ class User(db.Model, TimestampModel):
         self.username = username
         self.pass_hash = sha256_crypt.encrypt(password)
         self.friends_list = friends_list
+
+    def asdict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'created_on': self.created_on
+        }
