@@ -5,18 +5,14 @@ from . import db
 from sqlalchemy import *
 
 class User(db.Model, TimestampModel):
-    metadata = MetaData()
     username = db.Column(db.String(30), unique=True, nullable=False)
     pass_hash = db.Column(db.String(100), nullable=False)
-    friends_list = Table('friends_list', metadata,
-                   db.Column('friend_id', db.String(50), unique=True, nullable=False))
 
     # push_tokens = db.relationship('PushToken', back_populates='user')
 
     def __init__(self, username, password):
         self.username = username
         self.pass_hash = sha256_crypt.encrypt(password)
-        self.friends_list = friends_list
 
     def asdict(self):
         return {
