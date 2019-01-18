@@ -28,7 +28,7 @@ class ChatScreen extends Component {
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: 'Hi there!',
           createdAt: new Date(),
           user: {
             _id: 2,
