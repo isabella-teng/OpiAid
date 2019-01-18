@@ -25,6 +25,7 @@ def login_as_user(user_id):
 
 @login_blueprint.route('/me', methods=['POST', 'GET'])
 @login_required_api
+@jsonify_api
 def me_route():
     return current_user().asdict()
 
