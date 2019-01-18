@@ -6,7 +6,8 @@ const isAndroidDev = Platform.OS === 'android' && __DEV__;
 const ANDROID_EMULATOR_LOCAL = 'http://10.0.2.2';
 const IOS_LOCAL = 'https://43591c6d.ngrok.io';
 
-const HOST = isAndroidDev ? ANDROID_EMULATOR_LOCAL : IOS_LOCAL;
+// const HOST = isAndroidDev ? ANDROID_EMULATOR_LOCAL : IOS_LOCAL;
+const HOST = 'http://ec2-54-198-84-148.compute-1.amazonaws.com';
 
 const authHeader = () => {
   // append session cookie to headers

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tavhacks",
+    "name": "Opiaid",
     "description": "This project is really great.",
     "slug": "tavhacks",
     "privacy": "public",
@@ -8,9 +8,9 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo_square.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

@@ -33,6 +33,11 @@ class Home extends Component {
   panic = () => this.setState({modalVisible: true});
 
   render() {
+    const today = new Date();
+    const created_on = new Date();
+    const timeDiff = Math.abs(today.getTime() - created_on.getTime());
+    const dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
     return (
       <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', paddingHorizontal: 20 }}>
         <View style={{ height: 40, margin: 30, flexDirection: 'column', width: '100%', alignItems: 'flex-end' }}>
@@ -48,7 +53,7 @@ class Home extends Component {
             colors={['#9BCDFE', '#9CBDF8', '#83A4FF']}
             style={{ height: 160, width: 160, padding: 15, justifyContent: 'center', alignItems: 'center', borderRadius: 80 }}>
             <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 60, color: '#fff' }}>
-              136
+              {dayDifference}
             </Text>
             <Text style={{ textAlign: 'center', color: '#fff', fontSize: 16 }}>
               day streak
@@ -97,7 +102,7 @@ class Home extends Component {
 }
 
 const mapDispatchToProps = dispatchToProps({ logout: clearState });
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(({ user: { me } }) => ({ me }), mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
   buttonContainer: {
