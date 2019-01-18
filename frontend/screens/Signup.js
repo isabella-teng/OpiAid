@@ -58,7 +58,7 @@ class Signup extends Component {
     this.mounted && this.setState({ loading: false });
   };
 
-  validInput = () => this.state.username.length >= 5 && this.state.password.length >= 6;
+  validInput = () => this.state.username.length >= 2 && this.state.password.length >= 2;
 
   usernameChange = username => this.setState({ username });
   passwordChange = password => this.setState({ password });

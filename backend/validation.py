@@ -27,7 +27,7 @@ def valid_string(s,
 
 
 def valid_username(username):
-    username = valid_string(username, field_name='username', min_length=5, max_length=20)
+    username = valid_string(username, field_name='username', min_length=2, max_length=20)
     if not username.replace("_", "").isalnum():
         raise Exception('Username must be alphanumeric + _')
     return username
