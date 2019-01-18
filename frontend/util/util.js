@@ -4,7 +4,7 @@ import { store } from '../App';
 
 const isAndroidDev = Platform.OS === 'android' && __DEV__;
 const ANDROID_EMULATOR_LOCAL = 'http://10.0.2.2';
-const IOS_LOCAL = 'https://80dabdd9.ngrok.io';
+const IOS_LOCAL = 'https://43591c6d.ngrok.io';
 
 const HOST = isAndroidDev ? ANDROID_EMULATOR_LOCAL : IOS_LOCAL;
 

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { Component, Fragment } from 'react';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
+import Overlay from 'react-native-modal-overlay';
 
 import { navigate } from '../navigation/NavigationService';
 import { clearState, dispatchToProps } from '../redux/util';
@@ -12,6 +13,7 @@ const icons = {
   logout: require('../assets/images/icons8-sign-out-90.png'),
   chat: require('../assets/images/icons8-sms-90.png'),
   user: require('../assets/images/icons8-user-90.png'),
+  gif: require('../assets/images/breathe.gif')
 }
 
 class Home extends Component {
@@ -19,10 +21,16 @@ class Home extends Component {
     header: null,
   })
 
+  state = {
+    modalVisible: false,
+  }
+
   logout = () => this.props.logout(false, true)
   toChatBot = () => navigate('ChatScreen');
   toImportContacts = () => navigate('ImportContacts');
 
+  onClose = () => this.setState({ modalVisible: false});
+  panic = () => this.setState({modalVisible: true});
 
   render() {
     return (
@@ -62,6 +70,23 @@ class Home extends Component {
           </Touchable>
           <Touchable style={styles.bigButton} onPress={this.panic} feedback>
             <View style={[styles.button, styles.wideButton]}>
+              <Overlay visible={this.state.modalVisible} onClose={this.onClose}
+                containerStyle={{backgroundColor: 'rgba(37, 8, 10, 0.78)'}}
+                animationType="zoomIn"
+                childrenWrapperStyle={{backgroundColor: '#eee', height: 300, borderRadius: 20}}
+                animationDuration={500}
+                >
+                {
+                  (hideModal, overlayState) => (
+                    <Fragment>
+                      <View>
+                        <Image source={icons.gif} style={{height: 200, width: 200}} resizeMode='contain'/>
+                        <Button onPress={hideModal} title='Close'/>
+                      </View>
+                    </Fragment>
+                  )
+                }
+              </Overlay>
               <Text style={[styles.buttonText, { fontSize: 20, fontWeight: 'bold' }]}>Panic!</Text>
             </View>
           </Touchable>
@@ -113,5 +138,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  overlay: {
+    backgroundColor: 'rgba(37, 8, 10, 0.78)',
+    height: 800,
   },
 });
